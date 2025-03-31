@@ -19,4 +19,13 @@ if __name__ == "__main__":
 
     X_train, X_test, y_train, y_test = train_test_split(df_features, df_target, test_size=0.30, random_state=42)
 
-    
+    kpca = KernelPCA(n_components=4, kernel='poly')
+    kpca.fit(X_train)
+
+    X_train_kpca = kpca.transform(X_train)
+    X_test_kpca = kpca.transform(X_test)
+
+    logistic = LogisticRegression(solver='lbfgs')
+
+    logistic.fit(X_train_kpca, y_train)
+    print(f'Score KPCA: {logistic.score(X_test_kpca, y_test)}')
