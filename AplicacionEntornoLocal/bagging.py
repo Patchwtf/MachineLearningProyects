@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import BaggingClassifier, GradientBoostingClassifier
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -14,10 +14,20 @@ if __name__=="__main__":
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.35, random_state=42)
 
-    knn_class = KNeighborsClassifier().fit(X_train, y_train)
-    knn_pred = knn_class.predict(X_test)
-    print(f'Accuracy KNN: {accuracy_score(y_test, knn_pred)}')
 
-    bag_class = BaggingClassifier(estimator=KNeighborsClassifier(), n_estimators=50).fit(X_train, y_train)
-    bag_pred = bag_class.predict(X_test)
-    print(f'Accuracy Bagging: {accuracy_score(y_test, bag_pred)}')
+    modelo = 'boosting'
+    if modelo == 'bagging': 
+#Bagging
+        knn_class = KNeighborsClassifier().fit(X_train, y_train)
+        knn_pred = knn_class.predict(X_test)
+        print(f'Accuracy KNN: {accuracy_score(y_test, knn_pred)}')
+
+        bag_class = BaggingClassifier(estimator=KNeighborsClassifier(), n_estimators=50).fit(X_train, y_train)
+        bag_pred = bag_class.predict(X_test)
+        print(f'Accuracy Bagging: {accuracy_score(y_test, bag_pred)}')
+    else:
+#Boosting
+        boost = GradientBoostingClassifier(n_estimators=50).fit(X_train, y_train)
+        boost_pred = boost.predict(X_test)
+        print(f'Accuracy Boosting: {accuracy_score(y_test, boost_pred)}')
+
