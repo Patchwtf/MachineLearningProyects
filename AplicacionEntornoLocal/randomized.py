@@ -9,7 +9,7 @@ if __name__ == "__main__":
     y = df_data['score']
     reg = RandomForestRegressor()
     parametros = {
-        'n_estimators': range(4,16),
+        'n_estimators': range(4,15),
         'criterion': ['squared_error', 'absolute_error'],
         'max_depth': range(2, 12),
     }
