@@ -15,4 +15,5 @@ class Utils:
     
     def model_export(self, clf, score):
         print(f"Best score: {score}")
-        joblib.dump(clf, f'./models/best_model-{score}.pkl')
+        #joblib.dump(clf, f'./models/best_model-{score}.pkl')
+        joblib.dump(clf, f'./models/best_model.pkl')
