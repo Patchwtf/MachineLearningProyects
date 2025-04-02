@@ -11,7 +11,7 @@ if __name__ == "__main__":
     parametros = {
         'n_estimators': range(4,16),
         'criterion': ['squared_error', 'absolute_error'],
-        'max_depth': range(2, 10),
+        'max_depth': range(2, 12),
     }
 
     rand_est = RandomizedSearchCV(reg, parametros, n_iter=10, cv=3, scoring='neg_mean_squared_error').fit(X, y)
